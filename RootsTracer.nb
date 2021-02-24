@@ -1,0 +1,272 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9528,        264]
+NotebookOptionsPosition[      8703,        240]
+NotebookOutlinePosition[      9099,        256]
+CellTagsIndexPosition[      9056,        253]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Roots Tracer", "Title",
+ CellChangeTimes->{{3.823156776310574*^9, 
+  3.8231567793754168`*^9}},ExpressionUUID->"ad4d656a-be2a-4968-88d7-\
+9b5136993ebe"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", 
+  RowBox[{
+   SuperscriptBox["x", "5"], "+", "x", "+", "1"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"x_", ",", "z_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], "+", "z"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Discriminant", "[", 
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"x", ",", "z"}], "]"}], ",", "x"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.823155474471178*^9, 3.823155495431486*^9}, {
+  3.823157000732256*^9, 3.823157001022532*^9}, {3.823158488405058*^9, 
+  3.823158493703988*^9}, {3.823158549984016*^9, 3.823158557632606*^9}, {
+  3.8231593305984917`*^9, 3.823159338619084*^9}, {3.823160068341301*^9, 
+  3.823160068717852*^9}, {3.823161229526331*^9, 3.823161239868024*^9}, {
+  3.823161305042844*^9, 3.8231613142351103`*^9}, {3.823161727369636*^9, 
+  3.823161731290551*^9}, {3.8231633752943573`*^9, 3.823163375844981*^9}},
+ CellLabel->
+  "In[178]:=",ExpressionUUID->"bf29b5eb-b989-4e42-9ae3-a97da6f98a93"],
+
+Cell[BoxData[
+ RowBox[{"3381", "+", 
+  RowBox[{"12500", " ", "z"}], "+", 
+  RowBox[{"18750", " ", 
+   SuperscriptBox["z", "2"]}], "+", 
+  RowBox[{"12500", " ", 
+   SuperscriptBox["z", "3"]}], "+", 
+  RowBox[{"3125", " ", 
+   SuperscriptBox["z", "4"]}]}]], "Output",
+ CellChangeTimes->{{3.823159331886986*^9, 3.8231593390758743`*^9}, 
+   3.823160069292879*^9, 3.8231612405018263`*^9, 3.8231613147628307`*^9, {
+   3.823161728654532*^9, 3.823161731664937*^9}, {3.8231633680495253`*^9, 
+   3.823163376319788*^9}},
+ CellLabel->
+  "Out[180]=",ExpressionUUID->"f8a45557-1f0a-4693-be59-dec968f73050"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"branchPoints", "=", 
+   RowBox[{"z", "/.", 
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Discriminant", "[", 
+        RowBox[{
+         RowBox[{"f", "[", 
+          RowBox[{"x", ",", "z"}], "]"}], ",", "x"}], "]"}], "\[Equal]", 
+       "0"}], ",", "z"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"branchPointsPlot", "=", 
+    RowBox[{"ListPlot", "[", 
+     RowBox[{
+      RowBox[{"ReIm", "[", "branchPoints", "]"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", "Green"}]}], "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{"DynamicModule", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"z", "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0.1"}], "}"}]}], ",", "roots", ",", "points"}], 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"roots", "=", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{"x", "/.", 
+       RowBox[{"NSolve", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", 
+           RowBox[{"x", ",", 
+            RowBox[{"z", ".", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "\[ImaginaryI]"}], "}"}]}]}], "]"}], 
+          "\[Equal]", "0"}], ",", "x"}], "]"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"points", "=", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"PointSize", "[", "0.02", "]"}], ",", 
+           RowBox[{"Point", "[", 
+            RowBox[{"ReIm", "[", "#", "]"}], "]"}]}], "}"}], "&"}], ",", 
+        "roots"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Grid", "[", 
+     RowBox[{"{", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"LocatorPane", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "[", "z", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Show", "[", 
+           RowBox[{
+            RowBox[{"Graphics", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Red", ",", 
+                RowBox[{"PointSize", "[", "0.02", "]"}], ",", 
+                RowBox[{"Point", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    "z", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "]"}], ",", 
+                   RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    "z", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], "]"}]}], "}"}], "]"}]}], "}"}],
+               ",", 
+              RowBox[{"PlotRange", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "2"}], ",", "2"}], "}"}]}], "}"}]}], ",", 
+              RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+              RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", "branchPointsPlot"}], "]"}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{"points", ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "2"}], ",", "2"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}]}], 
+       "\[IndentingNewLine]", "}"}], "}"}], "]"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.823156782377253*^9, 3.8231568484018497`*^9}, {
+  3.8231568874813232`*^9, 3.823156915599951*^9}, {3.823158536638062*^9, 
+  3.823158569054256*^9}},
+ CellLabel->
+  "In[181]:=",ExpressionUUID->"cedf28b4-59f9-43b0-831b-37808f6decfc"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`z$$ = {-0.8300000000000001, 
+  0.5249999999999999}, $CellContext`roots$$ = Dynamic[
+   ReplaceAll[$CellContext`x, 
+    NSolve[$CellContext`f[$CellContext`x, 
+       Dot[$CellContext`z$$, {1, I}]] == 
+     0, $CellContext`x]]], $CellContext`points$$ = Dynamic[
+   Map[{
+     PointSize[0.02], 
+     Point[
+      ReIm[#]]}& , $CellContext`roots$$]]}, 
+  TagBox[GridBox[{
+     {
+      LocatorPaneBox[Dynamic[$CellContext`z$$], 
+       GraphicsBox[{
+         {RGBColor[1, 0, 0], PointSize[0.02], 
+          PointBox[{
+           Dynamic[Part[$CellContext`z$$, 1]], Dynamic[
+            Part[$CellContext`z$$, 2]]}]}, {{}, 
+          {RGBColor[0, 1, 0], PointSize[0.012833333333333334`], 
+           AbsoluteThickness[1.6], 
+           PointBox[{{-0.6217033563987296, -0.3782966436012703}, \
+{-1.3782966436012702`, 
+            0.3782966436012703}, {-1.3782966436012702`, -0.3782966436012703}, \
+{-0.6217033563987296, 0.3782966436012703}}]}, {{}, {}}}},
+        Frame->True,
+        ImageSize->500,
+        PlotRange->{{-2, 2}, {-2, 2}}]], 
+      GraphicsBox[
+       DynamicBox[Typeset`ToBoxes[
+         Map[{
+           PointSize[0.02], 
+           Point[
+            ReIm[#]]}& , $CellContext`roots$$], StandardForm, Graphics],
+        ImageSizeCache->{{164.3027158265196, 
+         355.92125540075716`}, {-111.58268107205936`, 68.43254404355181}}],
+       Frame->True,
+       ImageSize->500,
+       PlotRange->{{-2, 2}, {-2, 2}}]}
+    },
+    AutoDelete->False,
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Grid"],
+  DynamicModuleValues:>{}]], "Output",
+ CellChangeTimes->{{3.823155866029419*^9, 3.823155909549152*^9}, {
+   3.823155942197208*^9, 3.823156203046966*^9}, {3.8231562389895*^9, 
+   3.8231563897984543`*^9}, {3.823156460396654*^9, 3.823156543419541*^9}, {
+   3.823156576183457*^9, 3.823156727621057*^9}, 3.8231569786652107`*^9, 
+   3.823157014626946*^9, {3.823158513467058*^9, 3.8231585695044193`*^9}, 
+   3.8231612460320683`*^9, 3.823161317326643*^9, {3.8231633681338053`*^9, 
+   3.8231633778071823`*^9}},
+ CellLabel->
+  "Out[183]=",ExpressionUUID->"c5434a60-a7f3-4f2f-a14a-1f3cfd1f9510"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{977, 917},
+WindowMargins->{{Automatic, 17}, {Automatic, 0}},
+FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6ea69474-9a7a-4add-9e3d-2bd5b494d6e7"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 157, 3, 98, "Title",ExpressionUUID->"ad4d656a-be2a-4968-88d7-9b5136993ebe"],
+Cell[CellGroupData[{
+Cell[762, 29, 1026, 22, 73, "Input",ExpressionUUID->"bf29b5eb-b989-4e42-9ae3-a97da6f98a93"],
+Cell[1791, 53, 592, 14, 34, "Output",ExpressionUUID->"f8a45557-1f0a-4693-be59-dec968f73050"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2420, 72, 4074, 110, 283, "Input",ExpressionUUID->"cedf28b4-59f9-43b0-831b-37808f6decfc"],
+Cell[6497, 184, 2178, 52, 531, "Output",ExpressionUUID->"c5434a60-a7f3-4f2f-a14a-1f3cfd1f9510"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
